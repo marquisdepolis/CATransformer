@@ -153,7 +153,7 @@ cython_debug/
 .DS_Store
 test-1.ipynb
 \# older_scripts
-\#Archive
+\#Archive/
 flask/
 results_objective_3.json
 results_objective_4.json
