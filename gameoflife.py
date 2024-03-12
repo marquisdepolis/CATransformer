@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 class GameOfLife:
     def __init__(self, input_string, generations):
-        grid_size = int(len(input_string) ** 0.5)
+        grid_size = int(len(input_string)**0.5)
         self.grid_size = grid_size
         self.generations = generations
         self.grid = self.string_to_grid(input_string)
