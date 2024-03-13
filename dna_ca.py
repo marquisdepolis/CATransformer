@@ -129,8 +129,8 @@ class DNA_CA:
         grid_with_modifiers = self.initialize_grid_with_modifiers()
         final_grid_with_modifiers = self.generate_output_with_modifiers(grid_with_modifiers)
         # print(self.save_grid_to_file(final_grid_with_modifiers))
-        # self.visualize_grid_with_modifiers(grid_with_modifiers)
-        # self.visualize_grid_with_modifiers(final_grid_with_modifiers)
+        self.visualize_grid_with_modifiers(grid_with_modifiers)
+        self.visualize_grid_with_modifiers(final_grid_with_modifiers)
         return final_grid_with_modifiers
 
 if __name__ == "__main__":
