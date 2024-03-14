@@ -102,20 +102,6 @@ class DNA_CA:
                 grid = self.apply_rules_with_modifiers(grid, additional_iterations)
         return grid
 
-    def visualize_grid_with_modifiers(self, grid):
-        """Visualise the grid."""
-        base_colors = {'A': 'red', 'T': 'blue', 'C': 'green', 'G': 'yellow'}
-        colors = []
-        for row in grid:
-            row_colors = [base_colors[base] for base, _, _ in row]
-            colors.extend(row_colors)
-
-        plt.figure(figsize=(20, 2))
-        plt.bar(range(len(colors)), np.ones(len(colors)), color=colors)
-        plt.axis('off')
-        plt.title('Enhanced DNA Sequence Visualization with Modifiers')
-        plt.show()
-
     def save_grid_to_file(self, grid):
         """Change the grid to a text file with a flattened representation."""
         flattened = []
@@ -125,12 +111,25 @@ class DNA_CA:
         text = ''.join(flattened)
         return text
 
+    def visualize_grid_with_modifiers(self, grid, title_prefix="Enhanced DNA Sequence Visualization - "):
+        """Visualise the grid."""
+        base_colors = {'A': 'red', 'T': 'blue', 'C': 'green', 'G': 'yellow'}
+        colors = []
+        for row in grid:
+            row_colors = [base_colors[base] for base, _, _ in row]
+            colors.extend(row_colors)
+        title = title_prefix + str(type(grid).__name__)
+        plt.figure(figsize=(20, 2))
+        plt.bar(range(len(colors)), np.ones(len(colors)), color=colors)
+        plt.axis('off')
+        plt.title(title)
+        plt.show()
+
     def run_simulation(self):
-        grid_with_modifiers = self.initialize_grid_with_modifiers()
-        final_grid_with_modifiers = self.generate_output_with_modifiers(grid_with_modifiers)
-        # print(self.save_grid_to_file(final_grid_with_modifiers))
-        self.visualize_grid_with_modifiers(grid_with_modifiers)
-        self.visualize_grid_with_modifiers(final_grid_with_modifiers)
+        initial_grid_with_modifiers = self.initialize_grid_with_modifiers()
+        final_grid_with_modifiers = self.generate_output_with_modifiers(initial_grid_with_modifiers)
+        # self.visualize_grid_with_modifiers(initial_grid_with_modifiers)
+        # self.visualize_grid_with_modifiers(final_grid_with_modifiers)
         return final_grid_with_modifiers
 
 if __name__ == "__main__":

@@ -39,10 +39,11 @@ class GameOfLife:
                 total += self.grid[nx, ny]
         return total
 
-    def visualize_grid(self):
+    def visualize_grid(self, title_prefix = "Game of Life"):
         plt.figure(figsize=(10, 10))
         plt.imshow(self.grid, cmap='binary')
-        plt.title('Game of Life')
+        title = title_prefix  + str(type(self.grid).__name__)
+        plt.title(title)
         plt.axis('off')
         plt.show()
 
