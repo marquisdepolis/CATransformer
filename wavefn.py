@@ -16,7 +16,7 @@ class WaveFunction:
         self.dx = dx
         self.dt = dt
 
-    def simulate_wave_equation_non_bound(self, initial_profile, steps):
+    def simulate_wave_equation(self, initial_profile, steps):
         """
         Simulate the wave equation with non-boundary conditions (first and last step aren't bound to zero).
         
@@ -34,9 +34,9 @@ class WaveFunction:
             for i in range(1, n_points - 1):
                 if n == 0:
                     # For the first step, using a different approach for the edges to simulate non-boundary
-                    u[n+1, i] = u[n, i] + 0.5 * C2 * (u[n, i+1] - 2*u[n, i] + u[n, i-1])
+                    u[n+1, i] = np.round(u[n, i] + 0.5 * C2 * (u[n, i+1] - 2*u[n, i] + u[n, i-1])).astype(int)
                 else:
-                    u[n+1, i] = 2*u[n, i] - u[n-1, i] + C2 * (u[n, i+1] - 2*u[n, i] + u[n, i-1])
+                    u[n+1, i] = np.round(2*u[n, i] - u[n-1, i] + C2 * (u[n, i+1] - 2*u[n, i] + u[n, i-1])).astype(int)
             # Update the first and last points differently to remove boundary constraints
             u[n+1, 0] = u[n+1, 1]
             u[n+1, -1] = u[n+1, -2]
@@ -48,16 +48,17 @@ if __name__ == "__main__":
     c = 1.0  # Wave speed
     dx = 0.1  # Spatial step size
     dt = 0.1  # Time step size
-    steps = 100  # Number of time steps
+    steps = 10  # Number of time steps
     
     # Generate a "random" initial wave profile
     np.random.seed(42)  # Seed for reproducibility
-    initial_random_profile = np.random.rand(100)  # 100 points of random amplitudes
+    initial_random_profile = (np.random.rand(10)*5).astype(int)  # 100 points of random amplitudes
     
     # Create an instance of WaveFunction and run the simulation
     wave_fn = WaveFunction(c, dx, dt)
-    initial_profile, final_profile = wave_fn.simulate_wave_equation_non_bound(initial_random_profile, steps)
-    
+    initial_profile, final_profile = wave_fn.simulate_wave_equation(initial_random_profile, steps)
+    print(initial_profile)
+    print(final_profile)
     # Plotting (Optional)
     plt.figure(figsize=(10, 6))
     plt.plot(initial_profile, label='Initial Profile')
