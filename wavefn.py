@@ -41,7 +41,7 @@ class WaveFunction:
             u[n+1, 0] = u[n+1, 1]
             u[n+1, -1] = u[n+1, -2]
         
-        return initial_profile, u[-1, :]
+        return initial_profile, u[-1, :].astype(int)
 
 if __name__ == "__main__":
     # Simulation parameters
@@ -52,7 +52,7 @@ if __name__ == "__main__":
     
     # Generate a "random" initial wave profile
     np.random.seed(42)  # Seed for reproducibility
-    initial_random_profile = (np.random.rand(10)*5).astype(int)  # 100 points of random amplitudes
+    initial_random_profile = (np.random.rand(10)*5+5).astype(int)  # 100 points of random amplitudes
     
     # Create an instance of WaveFunction and run the simulation
     wave_fn = WaveFunction(c, dx, dt)
