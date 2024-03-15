@@ -162,3 +162,5 @@ __pycache__
 cat_wave_model.pth
 cat_cgol_model.pth
 cat_atcg_model.pth
+*.pth
+cat_wave_model.pth
