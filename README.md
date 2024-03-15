@@ -1,2 +1,2 @@
 # CATransformer
-Cellular Automata combined with a Transformer
+Trying to predict a Cellular Automata via a Transformer
