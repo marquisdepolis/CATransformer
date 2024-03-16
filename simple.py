@@ -16,7 +16,7 @@ class WaveFunction:
         self.dx = dx
         self.dt = dt
 
-    def simulate_wave_equation(self, input_wave, step, frequency=0.5, phase=0, max_val=10, min_val=0):
+    def simulate_wave_equation(self, input_wave, step, frequency=0.5, phase=0, max_val=9, min_val=0):
         """
         Apply sinusoidal modulation to an input wave over a number of steps.
         
