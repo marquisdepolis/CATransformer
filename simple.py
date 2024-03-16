@@ -54,7 +54,7 @@ if __name__ == "__main__":
     steps = 1  # Number of time steps
     
     # Generate a "random" initial wave profile
-    np.random.seed(42)  # Seed for reproducibility
+    # np.random.seed(42)  # Seed for reproducibility
     initial_random_profile = (np.random.rand(10)*5+5).astype(int)  # 10 points of random amplitudes
     
     # Create an instance of WaveFunction and run the simulation
