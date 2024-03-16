@@ -1,4 +1,4 @@
-# simulating the propagation of a one-dimensional wave governed by the wave equation
+# a simple equation. repurposed from wavefn, so some extra info below
 import numpy as np
 import matplotlib.pyplot as plt
 
