@@ -134,5 +134,5 @@ class DNA_CA:
         return flattened_grid_with_modifiers
 
 if __name__ == "__main__":
-    simulator = DNA_CA(100,100,10)
+    simulator = DNA_CA(64,64,2)
     simulator.run_simulation()
