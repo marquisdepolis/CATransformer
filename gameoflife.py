@@ -51,9 +51,9 @@ class GameOfLife:
         return ''.join(map(str, self.grid.flatten())).strip()
 
     def run_simulation(self):
-        self.visualize_grid()  # Visualize the initial state
+        # self.visualize_grid()  # Visualize the initial state
         self.apply_rules()
-        self.visualize_grid()  # Visualize the final state
+        # self.visualize_grid()  # Visualize the final state
         text = self.flatten_grid()  # Output the flattened final state
         # print(text)
         return text
