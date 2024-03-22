@@ -128,9 +128,10 @@ class DNA_CA:
     def run_simulation(self):
         initial_grid_with_modifiers = self.initialize_grid_with_modifiers()
         final_grid_with_modifiers = self.generate_output_with_modifiers(initial_grid_with_modifiers)
-        self.visualize_grid_with_modifiers(initial_grid_with_modifiers)
-        self.visualize_grid_with_modifiers(final_grid_with_modifiers)
-        return final_grid_with_modifiers
+        flattened_grid_with_modifiers = self.save_grid_to_file(final_grid_with_modifiers)
+        # self.visualize_grid_with_modifiers(initial_grid_with_modifiers)
+        # self.visualize_grid_with_modifiers(final_grid_with_modifiers)
+        return flattened_grid_with_modifiers
 
 if __name__ == "__main__":
     simulator = DNA_CA(100,100,10)
