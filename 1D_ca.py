@@ -41,4 +41,6 @@ class ElementaryCellularAutomaton:
         plt.show()
 
 if __name__ == "__main__":
-    
+    eca = ElementaryCellularAutomaton(rule_number=30, width=31)
+    eca.run_simulation(num_generations=15)
+    eca.visualize()
