@@ -3,7 +3,7 @@ import numpy as np
 
 class ECA: #Elementary Cellular Automata
     def __init__(self, width):
-        self.rule_number = 110
+        self.rule_number = 90
         self.width = width
         self.generations = []
 
@@ -55,7 +55,7 @@ class ECA: #Elementary Cellular Automata
 if __name__ == "__main__":
     eca = ECA(width=32)
     eca.set_initial_state(''.join(np.random.choice(['0','1'], 32)))
-    eca.run_simulation(num_generations=15)
+    eca.run_simulation(num_generations=2)
     eca.visualize()
     final_state = eca.generations[-1]
     print("Final State:", ''.join(map(str, final_state))) # to get a simple list
