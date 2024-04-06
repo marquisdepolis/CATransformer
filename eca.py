@@ -3,7 +3,7 @@ import numpy as np
 
 class ECA: #Elementary Cellular Automata
     def __init__(self, width):
-        self.rule_number = 28
+        self.rule_number = 0
         self.width = width
         self.generations = []
 
@@ -50,6 +50,28 @@ class ECA: #Elementary Cellular Automata
         plt.xlabel('Cell Position')
         plt.ylabel('Generation')
         plt.colorbar(label='State', orientation='vertical')
+        plt.show()
+
+    def visualize_comparison(self, ca_sequence, transformer_sequence, title1="CA Sequence", title2="Transformer Sequence"):
+        """
+        Visualizes two sequences side by side for comparison.
+        """
+        import matplotlib.pyplot as plt
+        fig, axs = plt.subplots(1, 2, figsize=(20, 6))  # Adjust figure size as needed
+
+        # Visualize CA sequence
+        axs[0].imshow(ca_sequence, cmap="Greys", interpolation="nearest")
+        axs[0].set_title(title1)
+        axs[0].set_xlabel('Cell Position')
+        axs[0].set_ylabel('Generation')
+
+        # Visualize Transformer sequence
+        axs[1].imshow(transformer_sequence, cmap="Greys", interpolation="nearest")
+        axs[1].set_title(title2)
+        axs[1].set_xlabel('Cell Position')
+        axs[1].set_ylabel('Generation')
+
+        plt.tight_layout()
         plt.show()
 
 if __name__ == "__main__":
