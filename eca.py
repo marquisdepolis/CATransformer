@@ -3,7 +3,7 @@ import numpy as np
 
 class ECA: #Elementary Cellular Automata
     def __init__(self, width):
-        self.rule_number = 0
+        self.rule_number = 90
         self.width = width
         self.generations = []
 
