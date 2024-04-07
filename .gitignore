@@ -165,3 +165,4 @@ cat_atcg_model.pth
 *.pth
 wavefn2.py
 test-1.ipynb
+*.jsonl
