@@ -101,6 +101,20 @@ if __name__ == "__main__":
     wave_transformation = WaveFunction()
     _, final_profile = wave_transformation.simulate_wave_equation(initial_random_profile)
     
+    # steps = 4
+    # transformation_functions = [wave_transformation.F1, wave_transformation.F2, 
+    #                             wave_transformation.F3, wave_transformation.F4]
+
+    # current_profile = initial_random_profile
+    # for _ in range(steps):
+    #     # Randomly select a transformation function and apply it to the current profile
+    #     func = random.choice(transformation_functions)
+    #     current_profile = func(current_profile)
+    #     # Optionally clip the wave to a specific range after each transformation
+    #     current_profile = np.clip(current_profile, 0, 9).astype(int)
+
+    # final_profile = current_profile
+    
     print("Initial Profile:", initial_random_profile)
     print("Final Profile:", final_profile)
     
