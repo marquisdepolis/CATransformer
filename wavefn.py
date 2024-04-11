@@ -71,29 +71,34 @@ class WaveFunction:
 
         return interference_factor * shifted_sequence
 
-    def simulate_wave_equation(self, input_wave, steps=1):
+    def simulate_wave_equation(self, input_wave, function_sequence=None):
         """
-        Simulate the transformation of a wave sequence through dispersion,
-        non-linear effects, attenuation, and interference over a specified number of steps.
+        Simulate the transformation of a wave sequence by applying a sequence of functions
+        in the order specified by the user.
         
         :param input_wave: The initial wave sequence as a list of integers.
-        :param steps: The number of steps over which to apply the transformations.
+        :param function_sequence: A list of function names as strings to be applied in order.
         :return: The transformed wave sequence as a NumPy array of integers.
         """
+        if function_sequence is None:
+            function_sequence = ['F1', 'F2', 'F3', 'F4']  # Default sequence
+
         current_wave = np.array(input_wave, dtype=int)
+        function_map = {
+            'F1': self.F1,
+            'F2': self.F2,
+            'F3': self.F3,
+            'F4': self.F4
+        }
 
-        for _ in range(steps):
-            wave_after_dispersion = self.F1(current_wave)
-            wave_after_non_linear = self.F2(wave_after_dispersion)
-            wave_after_attenuation = self.F3(wave_after_non_linear)
-            
-            # wave_for_interference = np.flip(wave_after_attenuation)
-            current_wave = self.F4(wave_after_attenuation)
+        for func_name in function_sequence:
+            if func_name in function_map:
+                current_wave = function_map[func_name](current_wave)
 
-            # Optionally clip the wave to a specific range after each step
-            current_wave = np.clip(current_wave, 0, 9).astype(int)
+        # Optionally clip the wave to a specific range after processing
+        current_wave = np.clip(current_wave, 0, 9).astype(int)
         
-        return input_wave, current_wave
+        return current_wave
     
     def normalize_profile(self, profile, desired_max=9):
         profile_max = np.max(profile)
@@ -109,13 +114,12 @@ if __name__ == "__main__":
     wave_transformation = WaveFunction()
     current_profile = initial_profile
 
-    # Apply transformations sequentially
-    for _ in range(1):  # Number of full transformation cycles
-        current_profile = wave_transformation.F1(current_profile)
-        current_profile = wave_transformation.F2(current_profile)
-        current_profile = wave_transformation.F3(current_profile)
-        current_profile = wave_transformation.F4(current_profile)
-        current_profile = wave_transformation.normalize_profile(current_profile, desired_max=9)  # Normalize after each cycle
+    # Specify the sequence of transformations
+    transformation_sequence = ['F1', 'F3', 'F2', 'F4']  # Example order, can be any combination of F1, F2, F3, F4
+
+    # Apply transformations in the specified order
+    current_profile = wave_transformation.simulate_wave_equation(current_profile, transformation_sequence)
+    current_profile = wave_transformation.normalize_profile(current_profile, desired_max=9)  # Normalize after transformations
 
     final_profile = current_profile
 
@@ -131,4 +135,3 @@ if __name__ == "__main__":
     plt.xlabel('Position')
     plt.ylabel('Amplitude')
     plt.show()
-
