@@ -84,12 +84,10 @@ class WaveFunction:
             wave_after_dispersion = self.F1(current_wave)
             wave_after_non_linear = self.F2(wave_after_dispersion)
             wave_after_attenuation = self.F3(wave_after_non_linear)
-            
-            # wave_for_interference = np.flip(wave_after_attenuation)
-            current_wave = self.F4(wave_after_attenuation)
+            wave_after_interference = self.F4(wave_after_attenuation)
 
             # Optionally clip the wave to a specific range after each step
-            current_wave = np.clip(current_wave, 0, 9).astype(int)
+            current_wave = np.clip(wave_after_interference, 0, 9).astype(int)
         
         return input_wave, current_wave
 
@@ -114,7 +112,7 @@ if __name__ == "__main__":
     #     current_profile = np.clip(current_profile, 0, 9).astype(int)
 
     # final_profile = current_profile
-    
+
     print("Initial Profile:", initial_random_profile)
     print("Final Profile:", final_profile)
     
