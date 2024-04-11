@@ -1,3 +1,5 @@
+# Underwater Acoustic Communication
+import random
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -84,44 +86,49 @@ class WaveFunction:
             wave_after_dispersion = self.F1(current_wave)
             wave_after_non_linear = self.F2(wave_after_dispersion)
             wave_after_attenuation = self.F3(wave_after_non_linear)
-            wave_after_interference = self.F4(wave_after_attenuation)
+            
+            # wave_for_interference = np.flip(wave_after_attenuation)
+            current_wave = self.F4(wave_after_attenuation)
 
             # Optionally clip the wave to a specific range after each step
-            current_wave = np.clip(wave_after_interference, 0, 9).astype(int)
+            current_wave = np.clip(current_wave, 0, 9).astype(int)
         
         return input_wave, current_wave
-
-# Example usage
+    
+    def normalize_profile(self, profile, desired_max=9):
+        profile_max = np.max(profile)
+        if profile_max > 0:
+            scale_factor = desired_max / profile_max
+            profile = profile * scale_factor
+        return profile.astype(int)
+    
 if __name__ == "__main__":
     length = 32
-    initial_random_profile = (np.random.rand(length) * 10).astype(int)  # Generate a "random" initial wave profile
+    initial_profile = (np.random.rand(length) * 10).astype(int)
     
     wave_transformation = WaveFunction()
-    _, final_profile = wave_transformation.simulate_wave_equation(initial_random_profile)
-    
-    # steps = 4
-    # transformation_functions = [wave_transformation.F1, wave_transformation.F2, 
-    #                             wave_transformation.F3, wave_transformation.F4]
+    current_profile = initial_profile
 
-    # current_profile = initial_random_profile
-    # for _ in range(steps):
-    #     # Randomly select a transformation function and apply it to the current profile
-    #     func = random.choice(transformation_functions)
-    #     current_profile = func(current_profile)
-    #     # Optionally clip the wave to a specific range after each transformation
-    #     current_profile = np.clip(current_profile, 0, 9).astype(int)
+    # Apply transformations sequentially
+    for _ in range(1):  # Number of full transformation cycles
+        current_profile = wave_transformation.F1(current_profile)
+        current_profile = wave_transformation.F2(current_profile)
+        current_profile = wave_transformation.F3(current_profile)
+        current_profile = wave_transformation.F4(current_profile)
+        current_profile = wave_transformation.normalize_profile(current_profile, desired_max=9)  # Normalize after each cycle
 
-    # final_profile = current_profile
+    final_profile = current_profile
 
-    print("Initial Profile:", initial_random_profile)
+    print("Initial Profile:", initial_profile)
     print("Final Profile:", final_profile)
     
     # Plotting the transformation
     plt.figure(figsize=(10, 6))
-    plt.plot(initial_random_profile, label='Initial Profile')
+    plt.plot(initial_profile, label='Initial Profile')
     plt.plot(final_profile, label='Final Profile')
     plt.legend()
     plt.title('Wave Sequence Transformation')
     plt.xlabel('Position')
     plt.ylabel('Amplitude')
     plt.show()
+
