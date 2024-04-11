@@ -95,7 +95,7 @@ class WaveFunction:
 
 # Example usage
 if __name__ == "__main__":
-    length = 24
+    length = 32
     initial_random_profile = (np.random.rand(length) * 10).astype(int)  # Generate a "random" initial wave profile
     
     wave_transformation = WaveFunction()
