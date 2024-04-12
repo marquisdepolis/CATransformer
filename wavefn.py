@@ -98,7 +98,7 @@ class WaveFunction:
         for func_name in function_sequence:
             if func_name in function_map:
                 current_wave = function_map[func_name](current_wave)
-        current_wave = np.clip(current_wave, 0, 9).astype(int)
+        current_wave = self.normalize_profile(current_wave, desired_max=9)
         
         return current_wave
 
