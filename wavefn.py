@@ -16,6 +16,7 @@ class WaveFunction:
         self.dx = dx
         self.dt = dt
         self.objectives = {
+            'S': ['F4'],  # Example for the simplest option
             'M': ['F1', 'F4'],  # Maximizing dispersion and interference
             'H': ['F2', 'F3'],  # Harmonize Non-linear Effects and Attenuation
             'B': ['F1', 'F2', 'F3', 'F4']  # Balanced Application of All Transformations
@@ -76,7 +77,7 @@ class WaveFunction:
 
         return interference_factor * shifted_sequence
 
-    def simulate_wave_equation(self, input_wave, objective='M'):
+    def simulate_wave_equation(self, input_wave, objective='S'):
         """
         Simulate the transformation of a wave sequence by applying a sequence of functions
         chosen based on a specified objective.
